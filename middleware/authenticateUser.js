@@ -16,4 +16,13 @@ const authenticateUser = (req, res, next) => {
   }
 };
 
-module.exports = authenticateUser;
+const authorizePermission = (...roles) => {
+  return (req, res, next) => {
+    if (!roles.includes(req.user.role)) {
+      throw new CustomError.UnAuthorizedError("Not Authorized for this route");
+    }
+    next();
+  };
+};
+
+module.exports = { authenticateUser, authorizePermission };
