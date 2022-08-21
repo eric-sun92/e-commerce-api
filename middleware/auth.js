@@ -13,6 +13,7 @@ const authorize = async (req, res, next) => {
   } catch (err) {
     throw new UnAuthenticatedError("Not Authorized");
   }
+  next();
 };
 
 module.exports = authorize;

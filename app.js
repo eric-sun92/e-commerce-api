@@ -14,13 +14,20 @@ app.use(express.static("/public"));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
+const cookieParser = require("cookie-parser");
+app.use(cookieParser(process.env.JWT_SECRET));
+
 //routes
 app.get("/", (req, res) => {
+  console.log(req.signedCookies);
   res.status(200).send("<h1> ECOMMERCE API </h1>");
 });
 
 const authRoutes = require("./routes/authRoutes");
 app.use("/api/v1/auth", authRoutes);
+
+const userRoutes = require("./routes/userRoutes");
+app.use("/api/v1/users", userRoutes);
 
 //middleware
 const notFound = require("./middleware/notFound");
