@@ -38,6 +38,9 @@ app.use("/api/v1/products", productRoutes);
 const reviewRoutes = require("./routes/reviewRoutes");
 app.use("/api/v1/reviews", reviewRoutes);
 
+const orderRoutes = require("./routes/orderRoutes");
+app.use("/api/v1/orders", orderRoutes);
+
 //middleware
 const notFound = require("./middleware/notFound");
 const errorHandler = require("./middleware/errorHandler");
